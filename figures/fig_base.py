@@ -1,5 +1,5 @@
-import sys, json, numpy as np, matplotlib; matplotlib.use('Agg'); sys.path.insert(0,'.')
-import matplotlib.pyplot as plt
+import os, sys, json, numpy as np, matplotlib; matplotlib.use('Agg'); ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__))); sys.path.insert(0,os.path.join(ROOT,'src'))
+import os, matplotlib.pyplot as plt
 from mmg import *
 plt.rcParams.update({'font.size':9,'font.family':'serif','mathtext.fontset':'cm','axes.grid':True,'grid.alpha':0.3})
 C={'pa':'#4C72B0','cu':'#C44E52','mms':'#55A868'}; LAB={'pa':'Product-average (MMG)','cu':'Convective upwind (MMG)','mms':'MMS scalar advection'}
@@ -13,7 +13,7 @@ for sc in C:
     ax.loglog(dx,[r['L2'] for r in R[sc]],MK[sc]+'-',color=C[sc],label=LAB[sc],mfc='none' if sc=='pa' else C[sc],ms=5)
 ax.loglog(dx,0.03*dx,'k--',lw=0.8,label=r'$O(\Delta x)$')
 ax.xaxis.set_minor_formatter(matplotlib.ticker.NullFormatter()); ax.set_xticks([2.5e-3,5e-3,1e-2,2e-2]); ax.set_xticklabels(['0.0025','0.005','0.01','0.02']); ax.set_xlabel(r'$\Delta x$'); ax.set_ylabel(r'$L_2$ error in $u$ at $T_{final}=2$'); ax.legend(fontsize=7.5)
-fig.tight_layout(); fig.savefig('figs/convergence.pdf')
+fig.tight_layout(); fig.savefig(os.path.join(ROOT,'results','figs','convergence.pdf'))
 # --- velocity + error
 fig,(a1,a2)=plt.subplots(2,1,figsize=(5.2,4.6),sharex=True,gridspec_kw={'height_ratios':[1.4,1]})
 r=R['pa'][1]; xf=np.linspace(0.005,1,400)
@@ -23,7 +23,7 @@ for sc in C:
     a2.semilogy(o['x'][1:-1],abs(o['u']-o['ue'])[1:-1],'-',color=C[sc],label=LAB[sc])
 a1.set_ylabel('$u$'); a1.legend(fontsize=7.5)
 a2.set_ylabel(r'$|u_{num}-u_{exact}|$'); a2.set_xlabel('$x$'); a2.set_ylim(1e-5,2e-3)
-fig.tight_layout(); fig.savefig('figs/velocity_error.pdf')
+fig.tight_layout(); fig.savefig(os.path.join(ROOT,'results','figs','velocity_error.pdf'))
 # --- domain
 fig,ax=plt.subplots(figsize=(5.6,3.2))
 o=R['pa'][1]; x=o['x']; b=o['b']
@@ -35,7 +35,7 @@ for sc in ['pa','cu']:
 ax.plot([0,1],[-2,-2],'--',color=C['mms'],lw=1.2,label=r'MMS bed $z=-k$')
 ax.plot([0,1],[0,0],':',color=C['mms'],lw=1.4,label=r'MMS surface $z=0$')
 ax.set_xlabel('$x$'); ax.set_ylabel('elevation $z$'); ax.set_ylim(-3.1,0.35); ax.legend(fontsize=6.8,loc='center',ncol=2,framealpha=0.95)
-fig.tight_layout(); fig.savefig('figs/domain.pdf')
+fig.tight_layout(); fig.savefig(os.path.join(ROOT,'results','figs','domain.pdf'))
 # --- residual decomposition + dt sweep
 fig,(a1,a2)=plt.subplots(1,2,figsize=(7.0,2.9))
 NN=[50,100,200,400,800]
@@ -57,5 +57,5 @@ for sc in ['pa','cu']:
     a2.axvline(lim[sc],color=C[sc],ls='--',lw=0.8)
 a2.set_xlabel(r'$\Delta t/\Delta x$'); a2.set_ylabel(r'$L_2$ error, $n=100$, $T=20$'); a2.set_ylim(1e-4,1e-3)
 a2.legend(fontsize=6.8); a2.set_title(r'(b) error vs. time step',fontsize=9,loc='left')
-fig.tight_layout(); fig.savefig('figs/residual_dt.pdf')
+fig.tight_layout(); fig.savefig(os.path.join(ROOT,'results','figs','residual_dt.pdf'))
 print('ok')

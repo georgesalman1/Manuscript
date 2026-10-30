@@ -1,0 +1,32 @@
+cff-version: 1.2.0
+message: "If you use this code, please cite the paper below."
+title: "MMG/MMS verification scripts for a fluid dynamic Voronoi model"
+type: software
+license: MIT
+repository-code: "https://github.com/georgesalman1/Manuscript"
+authors:
+  - family-names: Salman
+    given-names: George
+  - family-names: Liosis
+    given-names: Christos
+  - family-names: Peppa
+    given-names: Sofia
+  - family-names: Sarris
+    given-names: Ioannis
+preferred-citation:
+  type: article
+  title: "Manufactured Geometry vs. Manufactured Forcing: Verifying a Fluid Dynamic Voronoi Model"
+  journal: "Symmetry"
+  publisher:
+    name: "MDPI"
+  year: 2026
+  notes: "Under review, manuscript symmetry-4631884. DOI to be added on publication."
+  authors:
+    - family-names: Salman
+      given-names: George
+    - family-names: Liosis
+      given-names: Christos
+    - family-names: Peppa
+      given-names: Sofia
+    - family-names: Sarris
+      given-names: Ioannis

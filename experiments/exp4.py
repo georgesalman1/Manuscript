@@ -1,4 +1,4 @@
-import sys, json, numpy as np; sys.path.insert(0,'.')
+import os, sys, json, numpy as np; ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__))); sys.path.insert(0,os.path.join(ROOT,'src'))
 from mmg import *
 P=sine_profile(2.0); N=[50,100,200,400]; out={}
 print("== mutation (fault-injection) tests, T=2 ratio 0.02")
@@ -17,4 +17,4 @@ for name,(f,df) in cases.items():
         if any(r['blowup'] for r in res): print(name,d,'BLOWUP at t=%.2f'%res[0]['t']); out[f'zc_{name}_{d}']='blowup'; continue
         E=[r['L2'] for r in res]; p=orders(E)[1:]
         print(name,d,['%.2e'%e for e in E],['%.2f'%x for x in p]); out[f'zc_{name}_{d}']=(E,p)
-json.dump(out,open('exp4.json','w'),default=float)
+json.dump(out,open(os.path.join(ROOT,'results','exp4.json'),'w'),default=float)

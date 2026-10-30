@@ -1,4 +1,4 @@
-import sys, json, numpy as np; sys.path.insert(0,'.')
+import os, sys, json, numpy as np; ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__))); sys.path.insert(0,os.path.join(ROOT,'src'))
 from mmg import *
 N=[50,100,200,400]; out={}
 def conv(sc,P,Ns=N,**kw):
@@ -34,4 +34,4 @@ for sc,ratio in [('pa',0.05),('cu',0.05)]:
     E,res=conv(sc,M,Ns=N2,bc='periodic',T=5,ratio=ratio)
     print(sc,(['%.2e'%e for e in E],['%.2f'%p for p in orders(E)[1:]]) if E else 'X','drift',['%.1e'%r.get('drift',float('nan')) for r in res] )
     out[f'ms_{sc}']=(E,orders(E)[1:] if E else None,[r['drift'] for r in res])
-json.dump(out,open('exp3.json','w'),default=lambda o: float(o) if np.isscalar(o) else str(o))
+json.dump(out,open(os.path.join(ROOT,'results','exp3.json'),'w'),default=lambda o: float(o) if np.isscalar(o) else str(o))

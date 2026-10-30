@@ -1,5 +1,5 @@
-import numpy as np, json, sys
-sys.path.insert(0,'.')
+import os, numpy as np, json, sys
+ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__))); sys.path.insert(0,os.path.join(ROOT,'src'))
 from mmg import *
 P=sine_profile(2.0); N=[50,100,200,400]
 print("== baseline")

@@ -1,4 +1,5 @@
-import numpy as np, matplotlib; matplotlib.use('Agg')
+import os, numpy as np, matplotlib; matplotlib.use('Agg')
+ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__)))
 import matplotlib.pyplot as plt
 from matplotlib.patches import FancyArrowPatch, Rectangle
 from scipy.spatial import Voronoi
@@ -52,4 +53,4 @@ brace(1.5,n-0.5,-0.42,'$m=2{:}n-1$  (updated)')
 ax2.text(0.55,-0.85,r'$a=1{:}n,\;\; l=1{:}n-2,\;\; m=2{:}n-1,\;\; r=3{:}n$;  $\;\Delta x = V_i/A_{i,i+1}$',fontsize=8.5)
 ax2.set_xlim(0.2,n+0.8); ax2.set_ylim(-1.0,0.95); ax2.set_aspect('equal'); ax2.axis('off')
 ax2.set_title('(b) Compressed one-dimensional topology and index sets',fontsize=9,loc='left')
-fig.tight_layout(); fig.savefig('figs/compression_schematic.pdf'); fig.savefig('figs/compression_schematic.png',dpi=110)
+fig.tight_layout(); fig.savefig(os.path.join(ROOT,'results','figs','compression_schematic.pdf')); fig.savefig(os.path.join(ROOT,'results','figs','compression_schematic.png'),dpi=110)

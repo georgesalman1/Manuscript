@@ -1,4 +1,4 @@
-import sys, json, numpy as np; sys.path.insert(0,'.')
+import os, sys, json, numpy as np; ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__))); sys.path.insert(0,os.path.join(ROOT,'src'))
 from mmg import *
 out={}
 M=multiscale_profile(); N2=[50,100,200,400,800,1600]

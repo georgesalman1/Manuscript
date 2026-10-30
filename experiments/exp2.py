@@ -1,4 +1,4 @@
-import sys, json, numpy as np; sys.path.insert(0,'.')
+import os, sys, json, numpy as np; ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__))); sys.path.insert(0,os.path.join(ROOT,'src'))
 from mmg import *
 P=sine_profile(2.0); N=[50,100,200,400]
 out={}
@@ -18,4 +18,4 @@ for sc in ['pa','cu','mms']:
     o=run(100,sc,P,T=200,record=rec)
     print(sc,'L2(T=200) %.4e drift %.2e'%(o['L2'],o['drift']), 'hist first/last',o['hist'][0],o['hist'][-1])
     out[f'long_{sc}']=o['hist']; out[f'long_{sc}_L2']=o['L2']; out[f'long_{sc}_drift']=o['drift']
-json.dump(out,open('exp2.json','w'),default=float)
+json.dump(out,open(os.path.join(ROOT,'results','exp2.json'),'w'),default=float)

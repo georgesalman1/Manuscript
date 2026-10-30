@@ -2,10 +2,10 @@
 quadrilateral Voronoi cells, compared with the compressed 1D update.
 All geometry (areas, face lengths, normals, neighbor pairs) is taken from scipy's Voronoi
 construction, not assumed."""
-import sys
+import os, sys
 import numpy as np
 from scipy.spatial import Voronoi
-sys.path.insert(0, '.')
+ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__))); sys.path.insert(0,os.path.join(ROOT,'src'))
 from mmg import sine_profile, run
 
 g = 1.0

@@ -1,5 +1,5 @@
-import sys, json, numpy as np, matplotlib; matplotlib.use('Agg'); sys.path.insert(0,'.')
-import matplotlib.pyplot as plt
+import os, sys, json, numpy as np, matplotlib; matplotlib.use('Agg'); ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__))); sys.path.insert(0,os.path.join(ROOT,'src'))
+import os, matplotlib.pyplot as plt
 from mmg import *
 plt.rcParams.update({'font.size':9,'font.family':'serif','mathtext.fontset':'cm','axes.grid':True,'grid.alpha':0.3})
 fig,ax=plt.subplots(1,3,figsize=(7.4,2.7))
@@ -22,10 +22,10 @@ ax[1].plot(o['x'][::2],o['u'][::2],'o',ms=2.5,mfc='none',color='#4C72B0',label='
 ax[1].set_xlabel('$x$'); ax[1].set_ylabel('$u$'); ax[1].legend(fontsize=6.5,loc='lower right')
 ax[1].set_title('(b) multiscale profile',fontsize=9,loc='left')
 # (c) long time
-d=json.load(open('exp2.json'))
+d=json.load(open(os.path.join(ROOT,'results','exp2.json')))
 C={'pa':'#4C72B0','cu':'#C44E52','mms':'#55A868'}; L={'pa':'PA (MMG)','cu':'CU (MMG)','mms':'MMS'}
 for sc in C:
     h=np.array(d[f'long_{sc}']); ax[2].loglog(h[:,0],h[:,1],'-',color=C[sc],label=L[sc])
 ax[2].set_xlabel('$t$'); ax[2].set_ylabel(r'$L_2$ error, $n=100$'); ax[2].legend(fontsize=6.5)
 ax[2].set_title('(c) long integration',fontsize=9,loc='left')
-fig.tight_layout(); fig.savefig('figs/robustness.pdf'); fig.savefig('figs/robustness.png',dpi=90)
+fig.tight_layout(); fig.savefig(os.path.join(ROOT,'results','figs','robustness.pdf')); fig.savefig(os.path.join(ROOT,'results','figs','robustness.png'),dpi=90)

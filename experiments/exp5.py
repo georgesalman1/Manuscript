@@ -1,4 +1,4 @@
-import sys, numpy as np; sys.path.insert(0,'.')
+import os, sys, numpy as np; ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__))); sys.path.insert(0,os.path.join(ROOT,'src'))
 from mmg import *
 def crit(sc,P,n=100,hi=0.5,T=40,**kw):
     lo=0.0

@@ -1,4 +1,4 @@
-import sys, json, numpy as np; sys.path.insert(0,'.')
+import os, sys, json, numpy as np; ROOT=os.path.dirname(os.path.dirname(os.path.abspath(__file__))); sys.path.insert(0,os.path.join(ROOT,'src'))
 from mmg import *
 out={}
 P5=sine_profile(5.0)
@@ -16,4 +16,4 @@ for T in [5,10]:
 P3=sine_profile(3.0)
 R=[run(n,'pa',P3,bc='periodic',L=2*np.pi,T=40,ratio=0.04) for n in [50,100,200,400]]
 print('per k3 pa sum-u rel change',['%.1e'%(abs(r['u'].sum()-r['ue'].sum())/abs(r['ue'].sum())) for r in R], 'drift',['%.1e'%r['drift'] for r in R])
-json.dump(out,open('exp7.json','w'))
+json.dump(out,open(os.path.join(ROOT,'results','exp7.json'),'w'))
